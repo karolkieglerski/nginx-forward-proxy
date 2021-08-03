@@ -11,11 +11,19 @@ You can easily build a HTTP proxy server using this.
 
 - Docker
 
-### How to use
+### Use on docker
 
-```
+```bash
 $ docker run --rm -d -p 3128:3128 kilerkarol/nginx-forward-proxy:latest
 $ curl -x http://127.0.0.1:3128 https://www.google.com
+```
+
+### Use on kubernetes
+
+```bash
+$ kubectl apply -f nginx-forward-proxy.yaml
+# from another kubernetes container
+curl -x http://nginx-proxy-service.default.svc.cluster.local:3128 https://www.google.com
 ```
 
 ## Links

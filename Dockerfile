@@ -1,7 +1,4 @@
-#@# vim: set filetype=dockerfile:
 FROM alpine:3.10
-MAINTAINER Takahiro INOUE <takahiro.inoue@aist.go.jp>
-
 ENV NGINX_VERSION 1.17.5
 
 ####
@@ -10,12 +7,13 @@ ENV NGINX_VERSION 1.17.5
 
 WORKDIR /tmp
 
-RUN apk update && \
-    apk add       \
-      alpine-sdk  \
+RUN apk update \
+    && apk add --no-cache \
+      alpine-sdk \
       openssl-dev \
-      pcre-dev    \
-      zlib-dev
+      pcre-dev \
+      zlib-dev \
+      && rm -rf /var/cache/apk/*
 
 RUN curl -LSs http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz -O                                             && \
     tar xf nginx-${NGINX_VERSION}.tar.gz                                                                             && \
